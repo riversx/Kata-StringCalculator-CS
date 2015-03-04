@@ -7,9 +7,17 @@ namespace StringClaculator.Kata
 {
     class StringCalculator
     {
-        internal int Add(string p)
+        internal int Add(string numbers)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(numbers))
+                return 0;
+            int value = int.Parse(numbers);
+            if (value < 0)
+                throw new Exception("Negative numbers are not allowed!");
+            return value;
         }
+
+
+
     }
 }

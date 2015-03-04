@@ -62,15 +62,17 @@ namespace StringCalculator_MSTest
         [TestMethod]
         public void Add_ValuesWithNewLineAndEmptyPart_ThrowsExeption()
         {
+            Exception expectedException = null;
             try
             {
                 calc.Add("1,\n");
-                Assert.Fail("String '1,\n' should throw an exception!");
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("System.FormatException", ex.GetType().ToString());
+                expectedException = ex;
             }
+            Assert.IsNotNull(expectedException);
+            Assert.AreEqual(typeof(System.FormatException), expectedException.GetType());
         }
 
 
@@ -86,30 +88,34 @@ namespace StringCalculator_MSTest
         [TestMethod]
         public void Add_NegativeValue_ThrowException()
         {
+            Exception expectedException = null;
             try
             {
-                int result = calc.Add("1,-2");
-                Assert.Fail("Exception not thrown.");
+                calc.Add("1,-2");
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("negatives not allowed: -2", ex.Message);
+                expectedException = ex;
             }
+            Assert.IsNotNull(expectedException);
+            Assert.AreEqual("negatives not allowed: -2", expectedException.Message);
         }
 
 
         [TestMethod]
         public void Add_NegativeValues_ThrowException()
         {
-            try
+            Exception expectedException = null;
+            try 
             {
-                int result = calc.Add("-1,-2");
-                Assert.Fail("Exception not thrown.");
+                calc.Add("-1,-2");
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("negatives not allowed: -1,-2", ex.Message);
+                expectedException = ex;
             }
+            Assert.IsNotNull(expectedException);
+            Assert.AreEqual("negatives not allowed: -1,-2", expectedException.Message);
         }
 
 
